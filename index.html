@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兔U广播剧MBTI人格测试 | 声域漫游·心动解码</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #FF9AA2;
+            --primary-light: #FFD1DC;
+            --secondary: #B5EAD7;
+            --accent: #C7CEEA;
+            --text: #5D576B;
+            --light: #FFFFFF;
+            --shadow: rgba(149, 157, 165, 0.15);
+            --rabbit-pink: #FFB7C5;
+            --e-color: #FF9AA2;
+            --i-color: #C7CEEA;
+            --s-color: #B5EAD7;
+            --n-color: #FFDAC1;
+            --t-color: #A2D2FF;
+            --f-color: #FFB7C5;
+            --j-color: #B5EAD7;
+            --p-color: #FFDAC1;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px var(--shadow);
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .page {
+            padding: 40px 30px;
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .rabbit-brand {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--rabbit-pink);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 183, 197, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            color: var(--text);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1::after {
+            content: "";
+            display: block;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+            margin: 10px auto 0;
+        }
+
+        .header p {
+            color: var(--text);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .disclaimer {
+            background: rgba(255, 154, 162, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 25px 0;
+            font-size: 0.9rem;
+            text-align: center;
+            color: #666;
+            border: 1px dashed var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(142, 197, 252, 0.3);
+            margin: 10px 5px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(142, 197, 252, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn i {
+            margin-left: 8px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .dimension-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(142, 197, 252, 0.15);
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dimension-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        .dimension-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .dimension-desc {
+            font-size: 1.15rem;
+            color: var(--text);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 14px;
+            margin: 30px 0;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .question-container {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 8px 25px rgba(142, 197, 252, 0.15);
+            margin: 20px 0;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.35rem;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            text-align: center;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .option {
+            background: #f8f9ff;
+            border: 2px solid #e6e9ff;
+            border-radius: 18px;
+            padding: 20px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(142, 197, 252, 0.25);
+            border-color: var(--primary);
+        }
+
+        .option.selected {
+            background: rgba(142, 197, 252, 0.12);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(142, 197, 252, 0.2);
+        }
+
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .option-text {
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 35px;
+        }
+
+        .results-container {
+            text-align: center;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 25px rgba(142, 197, 252, 0.15);
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .personality-type {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin: 25px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 5px;
+        }
+
+        .personality-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            margin: 20px 0;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(142, 197, 252, 0.3);
+        }
+
+        .personality-desc {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin: 25px 0;
+            text-align: center;
+            padding: 0 15px;
+        }
+
+        .dimension-results {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 35px 0;
+        }
+
+        .dimension-result-item {
+            background: #f8f9ff;
+            border-radius: 18px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .dimension-name {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .dimension-score {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .dimension-tendency {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 10px;
+            padding: 8px 0;
+            border-radius: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.95rem;
+        }
+
+        .rabbit-icon {
+            font-size: 5rem;
+            color: var(--rabbit-pink);
+            margin: 25px 0;
+            text-shadow: 0 5px 15px rgba(255, 183, 197, 0.3);
+        }
+
+        .mbti-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 15px 0;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(142, 197, 252, 0.3);
+        }
+
+        .personality-highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .rabbit-elements {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.8rem;
+            color: var(--rabbit-pink);
+            opacity: 0.7;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 20px;
+            }
+            
+            .page {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .dimension-card, .question-container, .result-card {
+                padding: 25px 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .dimension-results {
+                grid-template-columns: 1fr;
+            }
+            
+            .personality-type {
+                font-size: 3.5rem;
+            }
+            
+            .btn {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .rabbit-brand {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                border-radius: 18px;
+            }
+            
+            .page {
+                padding: 25px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .question-text {
+                font-size: 1.15rem;
+            }
+            
+            .option-text {
+                font-size: 1.05rem;
+            }
+            
+            .personality-type {
+                font-size: 3rem;
+            }
+            
+            .rabbit-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 首页 -->
+        <div class="page active" id="home">
+            <div class="header">
+                <div class="rabbit-brand">
+                    <i class="fas fa-paw"></i> 兔U专属活动
+                </div>
+                <h1>声域漫游·心动解码</h1>
+                <p>当声音频率撞上"人格密码"<br>探索你的广播剧MBTI人格类型</p>
+                
+                <div class="rabbit-icon">
+                    <i class="fas fa-headphones-alt"></i>
+                </div>
+                
+                <div class="mbti-banner">
+                    <i class="fas fa-star"></i> 兔U MBTI 人格测试 <i class="fas fa-star"></i>
+                </div>
+            </div>
+            
+            <div class="dimension-card">
+                <h2 class="dimension-title">声控人格雷达启动！</h2>
+                <p class="dimension-desc">
+                    当频率共振心跳——<br>
+                    <span class="personality-highlight">E人</span>：弹幕风暴席卷公放🎉<br>
+                    <em>"声浪不公放，如同锦衣夜行！"</em><br><br>
+                    <span class="personality-highlight">I人</span>：0.5倍速盘细节成瘾🔍<br>
+                    <em>"呼吸声漏听0.1秒，今夜注定无眠"</em>
+                </p>
+                
+                <div class="disclaimer">
+                    <i class="fas fa-info-circle"></i> 本测试仅供娱乐，结果不代表专业心理评估
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" id="startBtn">
+                    开始测试 <i class="fas fa-play"></i>
+                </button>
+            </div>
+            
+            <div class="footer">
+                <p>通过20道广播剧场景选择题，解码你的声音人格</p>
+            </div>
+        </div>
+        
+        <!-- 维度介绍页 -->
+        <div class="page" id="dimension-intro">
+            <div class="rabbit-elements">
+                <i class="fas fa-paw"></i>
+            </div>
+            <div class="header">
+                <h1 id="dimension-title">维度名称</h1>
+                <p id="dimension-subtitle">维度副标题</p>
+            </div>
+            
+            <div class="dimension-card">
+                <div id="dimension-icon" style="font-size: 4rem; color: var(--primary); margin: 15px 0;">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <p class="dimension-desc" id="dimension-description">
+                    维度描述将显示在这里...
+                </p>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="dimension-progress" style="width: 0%"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" id="startDimensionBtn">
+                    开始答题 <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 题目页 -->
+        <div class="page" id="question">
+            <div class="rabbit-elements">
+                <i class="fas fa-paw"></i>
+            </div>
+            <div class="question-header">
+                <span id="dimension-indicator">维度 1/4</span>
+                <span id="question-indicator">题目 1/5</span>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="question-progress" style="width: 0%"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-text" id="question-text">
+                    题目内容将显示在这里...
+                </div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- 选项将通过JS动态生成 -->
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-outline" id="prevBtn">
+                        <i class="fas fa-arrow-left"></i> 上一题
+                    </button>
+                    <button class="btn" id="nextBtn">
+                        下一题 <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 结果页 -->
+        <div class="page" id="result">
+            <div class="rabbit-elements">
+                <i class="fas fa-paw"></i>
+            </div>
+            <div class="header">
+                <h1>测试结果</h1>
+                <p>你的兔U广播剧MBTI人格类型是</p>
+            </div>
+            
+            <div class="results-container">
+                <div class="result-card">
+                    <div class="personality-type" id="personality-type">INTJ</div>
+                    <div class="personality-tag" id="personality-tag">策略型听剧大师</div>
+                    
+                    <div class="personality-desc" id="personality-desc">
+                        你是一个深思熟虑的广播剧爱好者，偏好复杂剧情和深刻内涵。听剧时你会仔细分析每个情节转折和角色动机，常常在脑海中构建完整的故事框架。你享受独处时沉浸式听剧体验，耳机是你的最佳伴侣。
+                    </div>
+                    
+                    <div class="dimension-results">
+                        <div class="dimension-result-item">
+                            <div class="dimension-name">能量获取</div>
+                            <div class="dimension-score" id="dim1-score">4/5</div>
+                            <div class="dimension-tendency" id="dim1-tendency">内倾(I)</div>
+                        </div>
+                        <div class="dimension-result-item">
+                            <div class="dimension-name">信息获取</div>
+                            <div class="dimension-score" id="dim2-score">2/5</div>
+                            <div class="dimension-tendency" id="dim2-tendency">直觉(N)</div>
+                        </div>
+                        <div class="dimension-result-item">
+                            <div class="dimension-name">决策方式</div>
+                            <div class="dimension-score" id="dim3-score">5/5</div>
+                            <div class="dimension-tendency" id="dim3-tendency">思考(T)</div>
+                        </div>
+                        <div class="dimension-result-item">
+                            <div class="dimension-name">生活态度</div>
+                            <div class="dimension-score" id="dim4-score">4/5</div>
+                            <div class="dimension-tendency" id="dim4-tendency">判断(J)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn" id="restartBtn">
+                    <i class="fas fa-redo"></i> 重新测试
+                </button>
+                
+                <div class="disclaimer" style="margin-top: 30px;">
+                    <i class="fas fa-info-circle"></i> 本测试仅供娱乐，结果不代表专业心理评估
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 测试数据
+        const dimensions = [
+            {
+                id: 0,
+                title: "能量获取方式",
+                subtitle: "内倾(I) vs 外倾(E)",
+                icon: "fas fa-bolt",
+                description: "这个维度探索你如何获取能量。在听广播剧时，你是通过独处反思获得能量，还是通过与他人分享获得能量？",
+                questions: [
+                    "听剧时你更倾向：",
+                    "遇到喜欢的台词，你会：",
+                    "听剧时有人打扰，你会：",
+                    "你更爱听：",
+                    "听完一部剧后，你倾向于："
+                ],
+                options: [
+                    ["戴耳机独处", "用公放与他人共享"],
+                    ["反复回听品味", "立刻分享给朋友"],
+                    ["烦躁暂停，需要安静", "边听边聊，甚至讨论剧情"],
+                    ["独白深刻的心理剧", "群像热闹的喜剧"],
+                    ["写长评分析角色", "参与弹幕互动"]
+                ]
+            },
+            {
+                id: 1,
+                title: "信息获取方式",
+                subtitle: "实感(S) vs 直觉(N)",
+                icon: "fas fa-lightbulb",
+                description: "这个维度探索你如何获取信息。在听广播剧时，你更关注具体细节和现实元素，还是抽象概念和潜在意义？",
+                questions: [
+                    "听剧时你更关注：",
+                    "遇到逻辑漏洞，你会：",
+                    "你更爱听：",
+                    "听剧时做笔记，你会记：",
+                    "推荐剧时，你更看重："
+                ],
+                options: [
+                    ["场景音效的细节（如脚步声方位）", "台词背后的隐喻"],
+                    ["立刻出戏，纠结合理性", "忽略细节，沉浸情感"],
+                    ["现实题材剧（职场、校园）", "奇幻/科幻题材剧"],
+                    ["时间线、人物关系图", "灵感金句、脑洞延伸"],
+                    ["制作精良度", "创意新颖性"]
+                ]
+            },
+            {
+                id: 2,
+                title: "决策方式",
+                subtitle: "思考(T) vs 情感(F)",
+                icon: "fas fa-heart",
+                description: "这个维度探索你如何做出决策。在听广播剧时，你更倾向于逻辑分析还是情感共鸣？",
+                questions: [
+                    "听剧时角色面临抉择，你会：",
+                    "讨厌的角色类型：",
+                    "听到虐心剧情，你会：",
+                    "你更爱听：",
+                    "剧评中你更想写："
+                ],
+                options: [
+                    ["分析利弊，判断合理性", "共情角色，感受情绪"],
+                    ["冷血理性派", "圣母心泛滥型"],
+                    ["思考剧情逻辑是否合理", "直接哭爆，需要暂停平复"],
+                    ["硬核推理剧", "治愈甜宠剧"],
+                    ["剧情漏洞分析", "角色情感解读"]
+                ]
+            },
+            {
+                id: 3,
+                title: "生活态度",
+                subtitle: "判断(J) vs 感知(P)",
+                icon: "fas fa-calendar-alt",
+                description: "这个维度探索你的生活方式。在听广播剧时，你更喜欢计划有序还是灵活随性的方式？",
+                questions: [
+                    "听剧计划：",
+                    "听完一部剧后，你会：",
+                    "你更爱听：",
+                    "遇到烂尾剧，你会：",
+                    "听剧时最不能忍受："
+                ],
+                options: [
+                    ["提前列好追剧清单", "随缘刷到哪部听哪部"],
+                    ["立刻找下一部，无缝衔接", "空窗期消化情绪，再找新剧"],
+                    ["完整长篇连载剧", "短小精悍的单元剧"],
+                    ["愤怒差评，要求合理结局", "吐槽后佛系放弃"],
+                    ["更新不稳定", "剧情注水拖沓"]
+                ]
+            }
+        ];
+
+        // 人格类型描述
+        const personalityDescriptions = {
+            "INTJ": "你是一个深思熟虑的广播剧爱好者，偏好复杂剧情和深刻内涵。听剧时你会仔细分析每个情节转折和角色动机，常常在脑海中构建完整的故事框架。你享受独处时沉浸式听剧体验，耳机是你的最佳伴侣。",
+            "INTP": "你是一个富有创意的广播剧探索者，对新颖的剧情设定和世界观构建充满好奇。听剧时你会不断思考各种可能性，甚至自己脑补出不同的剧情走向。你偏好科幻、奇幻类题材，能欣赏复杂的叙事结构。",
+            "ENTJ": "你是一个目标明确的广播剧达人，听剧计划井井有条。你会主动寻找高质量剧集，并乐于组织听剧小组讨论剧情。在广播剧社区中，你常常担任意见领袖角色，推荐剧集时极具说服力。",
+            "ENTP": "你是一个思维活跃的广播剧爱好者，喜欢探索不同类型的剧集。听剧时你总能发现新颖的观点和角度，并乐于与他人进行思想碰撞。你偏好有反转和深度的剧情，讨厌俗套的故事发展。",
+            "INFJ": "你是一个富有同理心的广播剧欣赏者，能深刻理解角色情感和动机。听剧时你注重作品传递的价值观和人生意义，常被富有哲理的台词打动。你会反复回味喜欢的片段，并写下深刻的情感分析。",
+            "INFP": "你是一个浪漫主义的广播剧爱好者，容易被富有诗意的台词和细腻的情感描写打动。听剧时你完全沉浸在故事氛围中，与角色产生强烈共鸣。你偏好文艺风格的心理剧，欣赏独特的美学表达。",
+            "ENFJ": "你是一个热情洋溢的广播剧推广者，善于发现剧集中的情感价值和社会意义。听剧后你乐于组织讨论会，分享剧中打动你的情节。你偏好温暖治愈、传递正能量的剧集。",
+            "ENFP": "你是一个充满热情的广播剧体验者，对新奇题材充满好奇。听剧时你思维跳跃，常常从一个情节联想到各种生活场景。你偏好轻松幽默、富有创意的剧集，是朋友圈中的'剧集种草机'。",
+            "ISTJ": "你是一个注重细节的广播剧听众，偏好结构严谨、制作精良的剧集。听剧时你会注意时间线、场景转换等细节，对逻辑漏洞特别敏感。你习惯按计划听剧，对喜欢的剧集会反复收听。",
+            "ISFJ": "你是一个细腻体贴的广播剧欣赏者，特别关注剧中的情感细节和人物关系。听剧时你注重真实感，容易被平凡生活中的温情故事打动。你会认真记录听剧笔记，对喜欢的角色如数家珍。",
+            "ESTJ": "你是一个高效务实的广播剧听众，偏好结构清晰、主题明确的剧集。听剧时你注重剧情发展和实用性，会从剧中提取有用的生活经验。你习惯制定听剧计划，并高效执行。",
+            "ESFJ": "你是一个热情周到的广播剧分享者，听剧时特别关注人际关系和情感互动。你乐于组织听剧聚会，在社交圈中分享最新发现的优质剧集。你偏好温暖治愈、传递正能量的作品。",
+            "ISTP": "你是一个冷静分析的广播剧探索者，偏好悬疑推理、动作类题材。听剧时你会注意各种细节线索，尝试提前解开谜题。你习惯独立听剧，享受解谜的思维乐趣。",
+            "ISFP": "你是一个感性细腻的广播剧欣赏者，特别注重剧中的美学表达和情感氛围。听剧时你完全沉浸在故事创造的世界中，对音乐、音效特别敏感。你偏好文艺风格、富有美感的作品。",
+            "ESTP": "你是一个行动派的广播剧体验者，偏好快节奏、强冲突的剧集。听剧时你关注剧情发展和即时的感官体验，不喜欢拖沓的铺垫。你习惯边听剧边做其他事，善于多任务处理。",
+            "ESFP": "你是一个热情活力的广播剧爱好者，偏好轻松愉快、富有娱乐性的剧集。听剧时你特别享受与他人分享的快乐，常常边听边讨论剧情。你是朋友圈中的'快乐源泉'，善于活跃听剧氛围。"
+        };
+
+        // 人格类型标签
+        const personalityTags = {
+            "INTJ": "策略型听剧大师",
+            "INTP": "剧情解构专家",
+            "ENTJ": "听剧指挥官",
+            "ENTP": "脑洞开拓者",
+            "INFJ": "心灵共鸣者",
+            "INFP": "文艺鉴赏家",
+            "ENFJ": "情感导师",
+            "ENFP": "创意能量体",
+            "ISTJ": "细节分析师",
+            "ISFJ": "温情记录者",
+            "ESTJ": "高效听剧官",
+            "ESFJ": "社交分享家",
+            "ISTP": "冷静观察者",
+            "ISFP": "美学体验官",
+            "ESTP": "感官探险家",
+            "ESFP": "欢乐传播者"
+        };
+
+        // 状态管理
+        const state = {
+            currentPage: "home",
+            currentDimension: 0,
+            currentQuestion: 0,
+            answers: [[], [], [], []],
+            scores: [0, 0, 0, 0],
+            personalityType: "",
+            dimensionCompleted: [false, false, false, false] // 跟踪每个维度是否完成
+        };
+
+        // DOM元素
+        const pages = {
+            home: document.getElementById("home"),
+            dimensionIntro: document.getElementById("dimension-intro"),
+            question: document.getElementById("question"),
+            result: document.getElementById("result")
+        };
+
+        // 初始化
+        document.addEventListener("DOMContentLoaded", function() {
+            // 绑定按钮事件
+            document.getElementById("startBtn").addEventListener("click", startTest);
+            document.getElementById("startDimensionBtn").addEventListener("click", startDimensionQuestions);
+            document.getElementById("prevBtn").addEventListener("click", prevQuestion);
+            document.getElementById("nextBtn").addEventListener("click", nextQuestion);
+            document.getElementById("restartBtn").addEventListener("click", restartTest);
+        });
+
+        // 开始测试
+        function startTest() {
+            state.currentDimension = 0;
+            state.currentQuestion = 0;
+            state.answers = [[], [], [], []];
+            state.scores = [0, 0, 0, 0];
+            state.dimensionCompleted = [false, false, false, false];
+            state.personalityType = "";
+            showDimensionIntro();
+        }
+
+        // 显示维度介绍页
+        function showDimensionIntro() {
+            const dim = dimensions[state.currentDimension];
+            
+            document.getElementById("dimension-title").textContent = dim.title;
+            document.getElementById("dimension-subtitle").textContent = dim.subtitle;
+            document.getElementById("dimension-icon").innerHTML = `<i class="${dim.icon}"></i>`;
+            document.getElementById("dimension-description").textContent = dim.description;
+            
+            // 更新进度条 - 基于已完成维度
+            const completedDimensions = state.dimensionCompleted.filter(c => c).length;
+            const progress = (completedDimensions / dimensions.length) * 100;
+            document.getElementById("dimension-progress").style.width = `${progress}%`;
+            
+            // 切换页面
+            showPage("dimensionIntro");
+        }
+
+        // 开始维度的题目
+        function startDimensionQuestions() {
+            state.currentQuestion = 0;
+            showQuestion();
+        }
+
+        // 显示问题
+        function showQuestion() {
+            const dim = dimensions[state.currentDimension];
+            const questionIndex = state.currentQuestion;
+            
+            // 更新问题指示器
+            document.getElementById("dimension-indicator").textContent = `维度 ${state.currentDimension + 1}/4`;
+            document.getElementById("question-indicator").textContent = `题目 ${questionIndex + 1}/5`;
+            
+            // 更新进度条 - 基于已完成的题目数量
+            const completedQuestions = state.answers[state.currentDimension].filter(a => a !== undefined).length;
+            const progress = (completedQuestions / dim.questions.length) * 100;
+            document.getElementById("question-progress").style.width = `${progress}%`;
+            
+            // 设置问题文本
+            document.getElementById("question-text").textContent = dim.questions[questionIndex];
+            
+            // 创建选项
+            const optionsContainer = document.getElementById("options-container");
+            optionsContainer.innerHTML = "";
+            
+            const options = dim.options[questionIndex];
+            for (let i = 0; i < options.length; i++) {
+                const optionDiv = document.createElement("div");
+                optionDiv.className = "option";
+                if (state.answers[state.currentDimension][questionIndex] === i) {
+                    optionDiv.classList.add("selected");
+                }
+                
+                optionDiv.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + i)}</div>
+                    <div class="option-text">${options[i]}</div>
+                `;
+                
+                optionDiv.addEventListener("click", () => selectOption(i));
+                optionsContainer.appendChild(optionDiv);
+            }
+            
+            // 更新按钮状态
+            document.getElementById("prevBtn").style.visibility = questionIndex > 0 ? "visible" : "hidden";
+            
+            // 切换页面
+            showPage("question");
+        }
+
+        // 选择选项
+        function selectOption(optionIndex) {
+            // 移除之前的选择
+            const options = document.querySelectorAll(".option");
+            options.forEach(option => option.classList.remove("selected"));
+            
+            // 添加当前选择
+            options[optionIndex].classList.add("selected");
+            
+            // 保存答案
+            state.answers[state.currentDimension][state.currentQuestion] = optionIndex;
+            
+            // 更新进度条
+            const completedQuestions = state.answers[state.currentDimension].filter(a => a !== undefined).length;
+            const progress = (completedQuestions / dimensions[state.currentDimension].questions.length) * 100;
+            document.getElementById("question-progress").style.width = `${progress}%`;
+        }
+
+        // 上一题
+        function prevQuestion() {
+            if (state.currentQuestion > 0) {
+                state.currentQuestion--;
+                showQuestion();
+            } else {
+                // 如果当前是第一题，返回维度介绍页
+                showDimensionIntro();
+            }
+        }
+
+        // 下一题
+        function nextQuestion() {
+            // 确保已选择答案
+            if (state.answers[state.currentDimension][state.currentQuestion] === undefined) {
+                alert("请选择一个选项");
+                return;
+            }
+            
+            const dim = dimensions[state.currentDimension];
+            
+            if (state.currentQuestion < dim.questions.length - 1) {
+                // 进入下一题
+                state.currentQuestion++;
+                showQuestion();
+            } else {
+                // 标记当前维度为已完成
+                state.dimensionCompleted[state.currentDimension] = true;
+                
+                // 计算当前维度得分
+                calculateDimensionScore();
+                
+                if (state.currentDimension < dimensions.length - 1) {
+                    // 进入下一个维度
+                    state.currentDimension++;
+                    showDimensionIntro();
+                } else {
+                    // 所有维度完成，显示结果
+                    calculatePersonality();
+                    showResult();
+                }
+            }
+        }
+
+        // 计算维度得分
+        function calculateDimensionScore() {
+            // 每题选A得1分（索引0），选B得0分（索引1）
+            const answers = state.answers[state.currentDimension];
+            let score = 0;
+            
+            for (let i = 0; i < answers.length; i++) {
+                if (answers[i] === 0) { // A选项
+                    score++;
+                }
+            }
+            
+            state.scores[state.currentDimension] = score;
+        }
+
+        // 计算人格类型
+        function calculatePersonality() {
+            // 根据每个维度的得分判断倾向
+            const tendencies = [];
+            
+            // I/E维度：>=3分为I，否则为E
+            tendencies.push(state.scores[0] >= 3 ? "I" : "E");
+            // S/N维度：>=3分为S，否则为N
+            tendencies.push(state.scores[1] >= 3 ? "S" : "N");
+            // T/F维度：>=3分为T，否则为F
+            tendencies.push(state.scores[2] >= 3 ? "T" : "F");
+            // J/P维度：>=3分为J，否则为P
+            tendencies.push(state.scores[3] >= 3 ? "J" : "P");
+            
+            state.personalityType = tendencies.join("");
+        }
+
+        // 显示结果页
+        function showResult() {
+            // 设置人格类型
+            document.getElementById("personality-type").textContent = state.personalityType;
+            document.getElementById("personality-tag").textContent = personalityTags[state.personalityType] || "广播剧爱好者";
+            document.getElementById("personality-desc").textContent = personalityDescriptions[state.personalityType] || "你是一个独特的广播剧爱好者！";
+            
+            // 设置维度分数
+            document.getElementById("dim1-score").textContent = `${state.scores[0]}/5`;
+            document.getElementById("dim2-score").textContent = `${state.scores[1]}/5`;
+            document.getElementById("dim3-score").textContent = `${state.scores[2]}/5`;
+            document.getElementById("dim4-score").textContent = `${state.scores[3]}/5`;
+            
+            // 设置维度倾向
+            document.getElementById("dim1-tendency").textContent = state.scores[0] >= 3 ? "内倾(I)" : "外倾(E)";
+            document.getElementById("dim2-tendency").textContent = state.scores[1] >= 3 ? "实感(S)" : "直觉(N)";
+            document.getElementById("dim3-tendency").textContent = state.scores[2] >= 3 ? "思考(T)" : "情感(F)";
+            document.getElementById("dim4-tendency").textContent = state.scores[3] >= 3 ? "判断(J)" : "感知(P)";
+            
+            // 设置倾向颜色
+            document.getElementById("dim1-tendency").style.background = state.scores[0] >= 3 ? "rgba(199, 206, 234, 0.3)" : "rgba(255, 154, 162, 0.3)";
+            document.getElementById("dim2-tendency").style.background = state.scores[1] >= 3 ? "rgba(181, 234, 215, 0.3)" : "rgba(255, 218, 193, 0.3)";
+            document.getElementById("dim3-tendency").style.background = state.scores[2] >= 3 ? "rgba(162, 210, 255, 0.3)" : "rgba(255, 183, 197, 0.3)";
+            document.getElementById("dim4-tendency").style.background = state.scores[3] >= 3 ? "rgba(181, 234, 215, 0.3)" : "rgba(255, 218, 193, 0.3)";
+            
+            // 切换页面
+            showPage("result");
+        }
+
+        // 重新测试
+        function restartTest() {
+            state.currentDimension = 0;
+            state.currentQuestion = 0;
+            state.answers = [[], [], [], []];
+            state.scores = [0, 0, 0, 0];
+            state.dimensionCompleted = [false, false, false, false];
+            state.personalityType = "";
+            showPage("home");
+        }
+
+        // 显示指定页面
+        function showPage(pageName) {
+            // 隐藏所有页面
+            for (const page in pages) {
+                pages[page].classList.remove("active");
+            }
+            
+            // 显示当前页面
+            pages[pageName].classList.add("active");
+            state.currentPage = pageName;
+        }
+    </script>
+</body>
+</html>
